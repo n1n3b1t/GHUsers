@@ -30,6 +30,8 @@
                     android:scheme="ghusers" />
             </intent-filter>
         </activity>
+
+        <service android:name=".service.APIService" />
     </application>
 
 </manifest>

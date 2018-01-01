@@ -6,9 +6,7 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import com.n1n3b1t.ghusers.entity.User
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import java.util.*
+import io.reactivex.Single
 
 /**
  * Created by valentintaranenko on 27/12/2017.
@@ -23,7 +21,7 @@ interface UserDao {
     fun getUsers(filterString: String): LiveData<List<User>>
 
     @Query("SELECT * FROM User ORDER BY id DESC LIMIT 1")
-    fun getLastUser(): Flowable<List<User>>
+    fun getLastUser(): Single<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(users: List<User>)

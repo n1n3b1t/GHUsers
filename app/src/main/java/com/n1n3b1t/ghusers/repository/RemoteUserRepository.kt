@@ -2,25 +2,21 @@ package com.n1n3b1t.ghusers.repository
 
 import com.n1n3b1t.ghusers.entity.User
 import com.n1n3b1t.ghusers.service.GithubService
-import com.n1n3b1t.ghusers.util.d
-import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.Single
 import javax.inject.Inject
 
 /**
  * Created by valentintaranenko on 26/12/2017.
  */
-class RemoteUserRepository @Inject constructor(val githubService: GithubService) {
+class RemoteUserRepository @Inject constructor(private val githubService: GithubService) {
 
-    fun getUsers(lastUser: User): Flowable<List<User>> {
-        var last = lastUser
-        return githubService.getAllUsers(last.id).concatMap {
-            githubService.getAllUsers(last.id)
-        }.doOnEach {
-            it.value?.body()?.forEach { d("User #${it.id}") }
-            it.value?.body()?.last()?.let {
-                last = it
-            }
-        }.repeatUntil { lastUser.id > 200 }.map { it.body() }
+    fun getUsers(since: Long?): Single<List<User>> {
+        return githubService.getAllUsers(since)
+                .flatMapObservable { Observable.fromIterable(it.body()) }
+                .flatMap { githubService.getUser(it.login).map { it.body()!! }
+                        .toObservable() }
+                .toList()
     }
 
 }

@@ -1,13 +1,10 @@
 package com.n1n3b1t.ghusers
 
 import android.arch.lifecycle.Observer
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.n1n3b1t.ghusers.base.ViewModelFactory
-import com.n1n3b1t.ghusers.service.GithubService
 import com.n1n3b1t.ghusers.util.d
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -20,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        UserViewModel.create(this, viewModelFactory).getUsers().observe(this, Observer { it?.forEach { Log.d("User", "${it.login} ${it.avatar} followers, ${it.following} following") } })
+        UserViewModel.create(this, viewModelFactory).getUsers().observe(this, Observer { it?.forEach { Log.d("User", "${it.login} ${it.avatar} followers, ${it.following} following ${it.followers}") } })
     }
 
     override fun onResume() {
