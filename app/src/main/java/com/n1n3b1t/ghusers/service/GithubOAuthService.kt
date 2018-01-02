@@ -1,5 +1,6 @@
 package com.n1n3b1t.ghusers.service
 
+import com.n1n3b1t.ghusers.BuildConfig
 import com.n1n3b1t.ghusers.entity.OAuthRequest
 import com.n1n3b1t.ghusers.entity.OAuthResponse
 import io.reactivex.Single
@@ -19,9 +20,7 @@ interface GithubOAuthService {
 
     companion object {
         val GITHUB_CALLBACK = "ghusers://callback"
-        val CLIENT_ID = "5e2c310bccdea4f2d74a"
-        val CLIENT_SECRET = "bcce0f1f2e71feb2a4ab9728c6f827e1075feb20"
-        val GITHUB_OAUTH = "https://github.com/login/oauth/authorize?client_id=$CLIENT_ID&redirect_uri=$GITHUB_CALLBACK"
+        val GITHUB_OAUTH = "https://github.com/login/oauth/authorize?client_id=${BuildConfig.CLIENT_ID}&redirect_uri=$GITHUB_CALLBACK"
         fun create(): GithubOAuthService {
             val okHttpClient = OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }).build()
             return Retrofit.Builder().baseUrl("https://github.com")
@@ -32,7 +31,7 @@ interface GithubOAuthService {
                     .create(GithubOAuthService::class.java)
         }
 
-        fun makeRequest(code: String) = OAuthRequest(CLIENT_ID, CLIENT_SECRET, code)
+        fun makeRequest(code: String) = OAuthRequest(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET, code)
     }
 
     @Headers("Accept: application/json")
