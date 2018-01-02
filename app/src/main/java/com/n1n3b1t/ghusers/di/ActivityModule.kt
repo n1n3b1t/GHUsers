@@ -1,6 +1,6 @@
 package com.n1n3b1t.ghusers.di
 
-import com.n1n3b1t.ghusers.MainActivity
+import com.n1n3b1t.ghusers.users.MainActivity
 import com.n1n3b1t.ghusers.login.LoginActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

@@ -11,7 +11,7 @@ import javax.inject.Singleton
  * Created by valentintaranenko on 27/12/2017.
  */
 @Singleton
-@Component(modules = [AndroidInjectionModule::class, AppModule::class, ActivityModule::class, ServiceModule::class])
+@Component(modules = [AndroidInjectionModule::class, AppModule::class, ActivityModule::class, ServiceModule::class, FragmentModule::class])
 interface AppComponent {
     fun inject(app: GHApp)
     @Component.Builder

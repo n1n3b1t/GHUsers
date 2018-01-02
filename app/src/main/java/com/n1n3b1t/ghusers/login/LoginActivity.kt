@@ -2,13 +2,14 @@ package com.n1n3b1t.ghusers.login
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Button
-import com.n1n3b1t.ghusers.MainActivity
 import com.n1n3b1t.ghusers.R
+import com.n1n3b1t.ghusers.databinding.ActivityLoginBinding
 import com.n1n3b1t.ghusers.service.GithubOAuthService
+import com.n1n3b1t.ghusers.users.MainActivity
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -17,17 +18,18 @@ import javax.inject.Inject
  */
 class LoginActivity : AppCompatActivity() {
     @Inject lateinit var loginViewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        findViewById<Button>(R.id.but_login).setOnClickListener { showLoginIntent() }
+        DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login).viewModel = loginViewModel
         loginViewModel.uacToken.observe(this, Observer {
             it?.let {
                 if (it.isNotEmpty())
                     startMainActivity()
             }
         })
+        loginViewModel.loginAction.observe(this, Observer { it?.let { showLoginIntent() } })
     }
 
     fun showLoginIntent() {

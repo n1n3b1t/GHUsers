@@ -1,4 +1,4 @@
-package com.n1n3b1t.ghusers
+package com.n1n3b1t.ghusers.users
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel

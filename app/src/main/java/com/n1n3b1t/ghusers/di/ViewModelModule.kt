@@ -2,7 +2,7 @@ package com.n1n3b1t.ghusers.di
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.n1n3b1t.ghusers.UserViewModel
+import com.n1n3b1t.ghusers.users.UserViewModel
 import com.n1n3b1t.ghusers.base.ViewModelFactory
 import dagger.Binds
 import dagger.Module
