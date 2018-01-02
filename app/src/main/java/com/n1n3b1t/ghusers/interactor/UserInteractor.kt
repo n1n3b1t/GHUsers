@@ -30,4 +30,6 @@ class UserInteractor @Inject constructor(val localUserRepository: LocalUserRepos
                 .doOnSuccess { localUserRepository.addUsers(it) }
     }
 
+    fun findUser(query: String): LiveData<List<User>> = localUserRepository.findUser(query)
+
 }

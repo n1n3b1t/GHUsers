@@ -8,6 +8,7 @@
         android:layout_height="match_parent"
         tools:context="com.n1n3b1t.ghusers.users.MainActivity">
 
+
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -26,5 +27,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/search_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:visibility="gone" />
     </android.support.constraint.ConstraintLayout>
 </layout>

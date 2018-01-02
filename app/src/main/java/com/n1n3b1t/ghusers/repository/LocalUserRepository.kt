@@ -3,10 +3,8 @@ package com.n1n3b1t.ghusers.repository
 import android.arch.lifecycle.LiveData
 import com.n1n3b1t.ghusers.dao.UserDao
 import com.n1n3b1t.ghusers.entity.User
-import com.n1n3b1t.ghusers.util.d
 import com.n1n3b1t.ghusers.util.e
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -36,5 +34,7 @@ class LocalUserRepository @Inject constructor(private val remoteUserRepository: 
     fun addUsers(users: List<User>) {
         userDao.insertAll(users)
     }
+
+    fun findUser(query: String): LiveData<List<User>> = userDao.findUser("%$query%")
 
 }

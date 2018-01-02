@@ -14,7 +14,7 @@ import io.reactivex.Single
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM User WHERE login GLOB '[a-f]*'")
+    @Query("SELECT * FROM User")
     fun getUsers(): LiveData<List<User>>
 
     @Query("SELECT * FROM User WHERE login GLOB :filterString ORDER BY login ASC")
@@ -22,6 +22,9 @@ interface UserDao {
 
     @Query("SELECT * FROM User ORDER BY id DESC LIMIT 1")
     fun getLastUser(): Single<User>
+
+    @Query("SELECT * FROM User WHERE login LIKE :query")
+    fun findUser(query: String): LiveData<List<User>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(users: List<User>)
